@@ -1,7 +1,5 @@
 import xmlrpc.client
 
-print("===== MENU VOTER =====")
-
 class voter:
 
     def cekvoter(self, nim):
@@ -9,28 +7,50 @@ class voter:
         cek = s.cekVoter(nim)
         return cek
 
-    def tampil(self):
+    def tampilBEM(self):
         s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
-        return s.tampilBEM()
+        bem = s.tampilBEM()
+        return bem
 
-nim2 = input("NIM : ")
-nim = int(nim2)
+    def tampilDPM(self):
+        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
+        dpm = s.tampilDPM()
+        return dpm
+
+    def tampilHIMA(self):
+        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
+        hima = s.tampilHIMA()
+        return hima
+
+    def inputRecord(self,record,nim):
+        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
+        s.inputRecord(record,nim)
+
 a = voter()
+bem = a.tampilBEM()
+dpm = a.tampilDPM()
+hima = a.tampilHIMA()
+
+pilih = 99
 record = []
-if (a.cekvoter(nim) == True):
-    print(a.tampil())
-    pilih1 = input("Pilih BEM : ")
+while (pilih != 00):
+    print("===== MENU VOTER =====")
+    nim2 = input("NIM : ")
+    nim = int(nim2)
+    if (a.cekvoter(nim) == True):
+        record = []
+        print("***** PILIH BEM *****")
+        print(bem)
+        pilih1 = input("Pilih BEM : ")
 
-    print("PILIH DPM")
-    print("1. MT dan Khanza")
-    print("2. Agi dan Erin")
-    print("3. Taufan dan Tashya")
-    pilih2 = input("Pilih DPM : ")
+        print("***** PILIH DPM *****")
+        print(dpm)
+        pilih2 = input("Pilih DPM : ")
 
-    print("PILIH KAHIM")
-    print("1. Udin Gebok dan Jajang Oray")
-    print("2. Asep Pengkor dan Usep Pitak")
-    print("3. Dadang Sumur dan Ujang Kebon")
-    pilih3 = input("Pilih KAHIM : ")
+        print("***** PILIH KAHIM *****")
+        print(hima)
+        pilih3 = input("Pilih KAHIM : ")
 
-    record = [pilih1,pilih2,pilih3]
+        record = [pilih1, pilih2, pilih3]
+        print(record)
+        a.inputRecord(record,nim)
