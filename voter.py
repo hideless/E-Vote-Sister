@@ -78,3 +78,5 @@ while (pilih != 00):
             print("Mahasiswa sudah voting sebelumnya")
     else:
         print("Failed")
+
+print("IDAR LAAST EDIT GANTENH")
