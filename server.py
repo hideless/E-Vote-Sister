@@ -10,7 +10,8 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 #membuat server
-with SimpleXMLRPCServer(("127.0.0.1",5000), requestHandler=RequestHandler) as server:
+address = "127.0.0.1"
+with SimpleXMLRPCServer((address,5000), requestHandler=RequestHandler) as server:
     workbook = xlrd.open_workbook("database.xls")
     mhs = workbook.sheet_by_index(0)
     adm = workbook.sheet_by_index(1)
@@ -273,6 +274,7 @@ with SimpleXMLRPCServer(("127.0.0.1",5000), requestHandler=RequestHandler) as se
     server.register_instance(AllFuncs())
 
     try:
+        print("Server sedang berjalan pada alamat: ", address)
         print("Gunakan Control + C untuk keluar")
         server.serve_forever()
     except KeyboardInterrupt:
