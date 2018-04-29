@@ -5,7 +5,6 @@ class admin:
     def cekAdmin(self, username, password):
         s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
         cekAdmin = s.dataAdmin(username, password)
-        print("kontol")
 
         if (cekAdmin == True ):
             pilih = ""
