@@ -1,30 +1,42 @@
 import xmlrpc.client
 
 class voter:
-
+    def server(self):
+        s = xmlrpc.client.ServerProxy('http://192.168.0.13:5000')
+        return s
     def cekvoter(self, nim):
-        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
+        s = a.server()
         cek = s.cekVoter(nim)
         return cek
 
     def tampilBEM(self):
-        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
+        s = a.server()
         bem = s.tampilBEM()
         return bem
 
     def tampilDPM(self):
-        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
+        s = a.server()
         dpm = s.tampilDPM()
         return dpm
 
     def tampilHIMA(self):
-        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
+        s = a.server()
         hima = s.tampilHIMA()
         return hima
 
-    def inputRecord(self,record,nim):
-        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
-        s.inputRecord(record,nim)
+    def inputRecord(self,record,nim,start,end):
+        s = a.server()
+        s.inputRecord(record,nim,start,end)
+
+    def cektime(self):
+        s = a.server()
+        time = s.getTime()
+        return time
+
+    def cekStatusPilih(self,nim):
+        s = a.server()
+        cek = s.cekStatusPilih(nim)
+        return cek
 
 a = voter()
 bem = a.tampilBEM()
@@ -37,20 +49,32 @@ while (pilih != 00):
     print("===== MENU VOTER =====")
     nim2 = input("NIM : ")
     nim = int(nim2)
+    # print(a.cekvoter(nim))
+    # print(a.cekStatusPilih(nim))
     if (a.cekvoter(nim) == True):
-        record = []
-        print("***** PILIH BEM *****")
-        print(bem)
-        pilih1 = input("Pilih BEM : ")
+        if (a.cekStatusPilih(nim) == True):
+            start = a.cektime()
+            record = []
+            print("***** PILIH BEM *****")
+            for i in range(len(bem)):
+                print("|", i+1, "|", bem[i])
+            pilih1 = input("Pilih BEM : ")
 
-        print("***** PILIH DPM *****")
-        print(dpm)
-        pilih2 = input("Pilih DPM : ")
+            print("***** PILIH DPM *****")
+            for j in range(len(dpm)):
+                print("|", j+1, "|", dpm[j])
+            pilih2 = input("Pilih DPM : ")
 
-        print("***** PILIH KAHIM *****")
-        print(hima)
-        pilih3 = input("Pilih KAHIM : ")
+            print("***** PILIH KAHIM *****")
+            for k in range(len(hima)):
+                print("|",k+1,"|", hima[k])
+            pilih3 = input("Pilih KAHIM : ")
 
-        record = [pilih1, pilih2, pilih3]
-        print(record)
-        a.inputRecord(record,nim)
+            record = [pilih1, pilih2, pilih3]
+            end = a.cektime()
+            a.inputRecord(record, nim, start, end)
+            print("Voting Selesai")
+        else:
+            print("Mahasiswa sudah voting sebelumnya")
+    else:
+        print("Failed")
