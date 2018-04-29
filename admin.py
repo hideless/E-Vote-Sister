@@ -9,13 +9,14 @@ class admin:
         if (cekAdmin == True ):
             pilih = ""
             while (pilih != "0"):
+                print("\n""----- MENU UTAMA ADMIN -----")
                 print("1. Registrasi Voter")
                 print("2. Input Data")
                 print("3. Input Kandidat")
-                print("Ketik 0 untuk keluar")
+                print("0. Logout Admin")
                 pilih = input("Pilih\t: ")
                 if (pilih == "1"):
-                    nim2 = input("NIM untuk regis : ")
+                    nim2 = input("\n""Masukkan NIM untuk diaktivasi: ")
                     nim = int(nim2)
                     print(s.regis(nim))
 
@@ -80,9 +81,9 @@ class admin:
 pilih = 00
 while(pilih != "0"):
     pilih = 00
-    print("===== Menu Admin =====")
-
+    print("\n""----- Login Admin -----")
     username = input("Username : ")
     password = input("Password : ")
+    print("-----------------------")
     a = admin()
     a.cekAdmin(username,password)
