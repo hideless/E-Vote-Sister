@@ -1,3 +1,4 @@
+import threading
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
 import xlrd
@@ -10,8 +11,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 #membuat server
-address = "127.0.0.1"
-with SimpleXMLRPCServer((address,5000), requestHandler=RequestHandler) as server:
+with SimpleXMLRPCServer(("127.0.0.1",5000), requestHandler=RequestHandler) as server:
     workbook = xlrd.open_workbook("database.xls")
     mhs = workbook.sheet_by_index(0)
     adm = workbook.sheet_by_index(1)
@@ -33,10 +33,10 @@ with SimpleXMLRPCServer((address,5000), requestHandler=RequestHandler) as server
     #untuk mengetahui metode yang register
     server.register_introspection_functions()
 
-    class Admin:
+    class Admin(threading.Thread):
         def dataAdmin(self, user, pas):
             for i in range(1,rowadm):
-                print(adm.cell(i, 0).value, adm.cell(i, 1).value)
+                # print(adm.cell(i, 0).value, adm.cell(i, 1).value)
                 if (str(adm.cell(i, 0).value) == user and str(adm.cell(i, 1).value) == pas):
                     return True
             return False
@@ -168,7 +168,7 @@ with SimpleXMLRPCServer((address,5000), requestHandler=RequestHandler) as server
             mhs = workbook.sheet_by_index(0)
             rowmhs = mhs.nrows
             for i in range(1, rowmhs):
-                print(int(mhs.cell(i, 0).value), str(mhs.cell(i, 5).value))
+                # print(int(mhs.cell(i, 0).value), str(mhs.cell(i, 5).value))
                 if (int(mhs.cell(i, 0).value) == nim and str(mhs.cell(i, 5).value) == "no"):
                     # if (str(mhs.cell(i+1, 5).value) == "no"):
                     return True
@@ -183,8 +183,8 @@ with SimpleXMLRPCServer((address,5000), requestHandler=RequestHandler) as server
             hima = workbook.sheet_by_index(5)
             rowrec = rec.nrows
             rowmhs = mhs.nrows
-            for i in range(rowrec):
-                if (int(rec.cell(i + 1, 0).value) == nim):
+            for i in range(1, rowrec):
+                if (int(rec.cell(i, 0).value) == nim):
                     wb = open_workbook("database.xls")
                     wr = copy(wb)
                     s = wr.get_sheet(2)
@@ -193,20 +193,20 @@ with SimpleXMLRPCServer((address,5000), requestHandler=RequestHandler) as server
                     u = wr.get_sheet(4)
                     v = wr.get_sheet(5)
 
-                    s.write(rowrec-1, 4, start)
-                    s.write(rowrec-1, 5, end)
-                    s.write(rowrec-1, 6, int(record[0]))
+                    s.write(i, 4, start)
+                    s.write(i, 5, end)
+                    s.write(i, 6, int(record[0]))
+                    s.write(i, 7, int(record[1]))
+                    s.write(i, 8, int(record[2]))
 
                     for x in range(1,rowbem):
                         if (int(bem.cell(x,0).value) == int(record[0])):
                             t.write(x, 2, int(bem.cell(x,2).value)+1)
 
-                    s.write(rowrec-1, 7, int(record[1]))
                     for x in range(1,rowdpm):
                         if (int(dpm.cell(x,0).value) == int(record[1])):
                             u.write(x, 2, int(dpm.cell(x,2).value)+1)
 
-                    s.write(rowrec-1, 8, int(record[2]))
                     for x in range(1,rowhima):
                         if (int(hima.cell(x,0).value) == int(record[2])):
                             v.write(x, 2, int(hima.cell(x,2).value)+1)
@@ -217,7 +217,6 @@ with SimpleXMLRPCServer((address,5000), requestHandler=RequestHandler) as server
                             break
                     wr.save('database.xls')
                     return True
-                    break
 
     server.register_instance(Voters())
 
@@ -274,7 +273,6 @@ with SimpleXMLRPCServer((address,5000), requestHandler=RequestHandler) as server
     server.register_instance(AllFuncs())
 
     try:
-        print("Server sedang berjalan pada alamat: ", address)
         print("Gunakan Control + C untuk keluar")
         server.serve_forever()
     except KeyboardInterrupt:
