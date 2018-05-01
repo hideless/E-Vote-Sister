@@ -12,7 +12,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 #membuat server
-with SimpleXMLRPCServer(("192.168.0.5",5000), requestHandler=RequestHandler) as server:
+with SimpleXMLRPCServer(("127.0.0.1",5000), requestHandler=RequestHandler) as server:
     workbook = xlrd.open_workbook("database.xls")
     mhs = workbook.sheet_by_index(0)
     adm = workbook.sheet_by_index(1)
@@ -137,16 +137,16 @@ with SimpleXMLRPCServer(("192.168.0.5",5000), requestHandler=RequestHandler) as 
                 s.write(i, 2, "")
 
             for i in range(1,(rowdpm)):
-                s.write(i, 0 , int(i))
-                s.write(i, 0, "")
-                s.write(i, 1,"")
-                s.write(i, 2, "")
+                t.write(i, 0 , int(i))
+                t.write(i, 0, "")
+                t.write(i, 1,"")
+                t.write(i, 2, "")
 
-            for i in range(1,len(rowhima)):
-                s.write(i, 0 , int(i))
-                s.write(i, 0, "")
-                s.write(i, 1,"")
-                s.write(i, 2, "")
+            for i in range(1,(rowhima)):
+                u.write(i, 0 , int(i))
+                u.write(i, 0, "")
+                u.write(i, 1,"")
+                u.write(i, 2, "")
 
             for i in range(len(xbem)):
                 s.write(i+1, 0, int(i + 1))

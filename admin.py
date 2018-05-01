@@ -4,7 +4,7 @@ import time
 class admin:
 
     def cekAdmin(self, username, password):
-        s = xmlrpc.client.ServerProxy('http://192.168.0.5:5000')
+        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
         cekAdmin = s.dataAdmin(username, password)
 
         if (cekAdmin == True ):
@@ -48,6 +48,7 @@ class admin:
                                 break
                             else:
                                 print("Jumlah Kandidat Tidak Valid (>=2)")
+                                break
 
                         jum2 = input("Jumlah Kandidat DPM\t: ")
                         jum = int(jum2)
@@ -60,6 +61,7 @@ class admin:
                                 break
                             else:
                                 print("Jumlah Kandidat Tidak Valid (>=2)")
+                                break
 
                         jum2 = input("Jumlah Kandidat HIMA\t: ")
                         jum = int(jum2)
@@ -72,6 +74,7 @@ class admin:
                                 break
                             else:
                                 print("Jumlah Kandidat Tidak Valid (>=2)")
+                                break
                         s.inputDataKandidat(bem, dpm, hima)
 
                     else:
