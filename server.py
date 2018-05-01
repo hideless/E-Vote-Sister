@@ -129,6 +129,18 @@ with SimpleXMLRPCServer(("127.0.0.1",5000), requestHandler=RequestHandler) as se
             s = wr.get_sheet(3)
             t = wr.get_sheet(4)
             u = wr.get_sheet(5)
+            
+            for i in range(1,len(xbem)):
+                s.write(i, 0 , int(i))
+                s.write(i, 1,"")
+
+            for i in range(1,len(xdpm)):
+                s.write(i, 0 , int(i))
+                s.write(i, 1,"")
+
+            for i in range(1,len(xhima)):
+                s.write(i, 0 , int(i))
+                s.write(i, 1,"")
 
             for i in range(len(xbem)):
                 s.write(i+1, 0, int(i + 1))
