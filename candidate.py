@@ -21,10 +21,7 @@ class candidate():
             for k in range(len(hima)):
                 print(hima[k])
 
-            print("Hasil Akhir Pemilihan:")
-            print("BEM Terpilih adalah: ", )
-            print("DPM Terpilih adalah: ", )
-            print("HIMA Terpilih adalah: ", )
+            print("\n ================================== \n")
         else:
             print("Login Gagal!")
             print("Username atau Password salah!")

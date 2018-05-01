@@ -4,7 +4,7 @@ import time
 class admin:
 
     def cekAdmin(self, username, password):
-        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
+        s = xmlrpc.client.ServerProxy('http://192.168.0.5:5000')
         cekAdmin = s.dataAdmin(username, password)
 
         if (cekAdmin == True ):
@@ -12,8 +12,8 @@ class admin:
             while (pilih != "0"):
                 print("\n""----- MENU UTAMA ADMIN -----")
                 print("1. Registrasi Voter")
-                print("2. Input Data")
-                print("3. Input Kandidat")
+                print("2. Input Data Voter")
+                print("3. Input Data Kandidat")
                 print("0. Logout Admin")
                 pilih = input("Pilih\t: ")
                 if (pilih == "1"):
@@ -23,17 +23,17 @@ class admin:
                     time.sleep(1)
 
                 elif(pilih == "2"):
-                    print("Input Data")
-                    nim = input("NIM\t: ")
-                    nama = input("Nama\t: ")
-                    fakultas = input("Fakultas\t: ")
-                    prodi  = input("Prodi\t: ")
+                    print("\nInput Data Voter")
+                    nim = input("NIM: ")
+                    nama = input("Nama: ")
+                    fakultas = input("Fakultas: ")
+                    prodi  = input("Prodi: ")
                     s.inputDataVoter(nim, nama, fakultas, prodi)
                     print("Data Saved")
 
                 elif(pilih == "3"):
                     if(cekAdmin == True):
-                        print("Input Pasangan Kandidat")
+                        print("\nInput Pasangan Kandidat")
                         bem = list()
                         dpm = list()
                         hima = list()

@@ -51,6 +51,9 @@ while (pilih != 00):
     print("===== MENU VOTER =====")
     nim2 = input("NIM : ")
     nim = int(nim2)
+    # if (a.cekvoter(nim) == False):
+    #     print("\n""||| NIM anda belum terdaftar |||")
+    #     print("||| Silahkan mendaftarkan NIM anda kepada Admin |||", "\n")
     # print(a.cekvoter(nim))
     # print(a.cekStatusPilih(nim))
     try:
