@@ -338,6 +338,10 @@ with SimpleXMLRPCServer(("192.168.0.5",5000), requestHandler=RequestHandler) as 
     server.register_instance(Voters())
 
     class Candidate():
+        workbook = xlrd.open_workbook("database.xls")
+        bem = workbook.sheet_by_index(3)
+        dpm = workbook.sheet_by_index(4)
+        hima = workbook.sheet_by_index(5)
         def candidateAppBEM(self):
             cbem = []
             for i in range(1, rowbem):
