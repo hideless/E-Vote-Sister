@@ -11,7 +11,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 #membuat server
-with SimpleXMLRPCServer(("192.168.0.13",5000), requestHandler=RequestHandler) as server:
+with SimpleXMLRPCServer(("192.168.0.5",5000), requestHandler=RequestHandler) as server:
     workbook = xlrd.open_workbook("database.xls")
     mhs = workbook.sheet_by_index(0)
     adm = workbook.sheet_by_index(1)
@@ -63,9 +63,9 @@ with SimpleXMLRPCServer(("192.168.0.13",5000), requestHandler=RequestHandler) as
 
                         s.write(i+1, 4, 'yes')
                         wr.save('database.xls')
-                        return "Regis Success"
+                        return "Registrasi Sukses! \nSilahkan Lakukan E-Voting"
                     else:
-                        return "Sudah Regis"
+                        return "Maaf, Anda Sudah Melakukan Registrasi Sebelumnya"
             return True
 
         def cekVoter(self,nim):
@@ -87,6 +87,8 @@ with SimpleXMLRPCServer(("192.168.0.13",5000), requestHandler=RequestHandler) as
                         return True
                     else:
                         return False
+                else:
+                    return False
 
         def inputDataVoter(self, nim, nama, fakultas, prodi):
             workbook = xlrd.open_workbook("database.xls")
@@ -276,6 +278,7 @@ with SimpleXMLRPCServer(("192.168.0.13",5000), requestHandler=RequestHandler) as
     server.register_instance(AllFuncs())
 
     try:
+        print("Server sedang berjalan...")
         print("Gunakan Control + C untuk keluar")
         server.serve_forever()
     except KeyboardInterrupt:

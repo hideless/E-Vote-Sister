@@ -2,8 +2,9 @@ import xmlrpc.client
 
 class voter:
     def server(self):
-        s = xmlrpc.client.ServerProxy('http://192.168.0.13:5000')
+        s = xmlrpc.client.ServerProxy('http://192.168.0.5:5000')
         return s
+
     def cekvoter(self, nim):
         s = a.server()
         cek = s.cekVoter(nim)
@@ -55,28 +56,28 @@ while (pilih != 00):
         if (a.cekStatusPilih(nim) == True):
             start = a.cektime()
             record = []
-            print("***** PILIH BEM *****")
+            print("Silahkan Gunakan Hak Pilih Anda...\n")
+            print("---- PILIH BEM ----")
             for i in range(len(bem)):
                 print("|", i+1, "|", bem[i])
             pilih1 = input("Pilih BEM : ")
 
-            print("***** PILIH DPM *****")
+            print("\n---- PILIH DPM ----")
             for j in range(len(dpm)):
                 print("|", j+1, "|", dpm[j])
             pilih2 = input("Pilih DPM : ")
 
-            print("***** PILIH KAHIM *****")
+            print("\n---- PILIH HIMA ----")
             for k in range(len(hima)):
                 print("|",k+1,"|", hima[k])
-            pilih3 = input("Pilih KAHIM : ")
+            pilih3 = input("Pilih HIMA : ")
 
             record = [pilih1, pilih2, pilih3]
             end = a.cektime()
             a.inputRecord(record, nim, start, end)
-            print("Voting Selesai")
+            print("Terimakasih Sudah Melakukan Voting \n")
         else:
-            print("Mahasiswa sudah voting sebelumnya")
+            print("\n||| Mahasiswa sudah voting sebelumnya ||| \n")
     else:
-        print("Failed")
-
-print("IDAR LAAST EDIT GANTENH")
+        print("\n""||| NIM anda belum terdaftar |||")
+        print("||| Silahkan mendaftarkan NIM anda kepada Admin |||", "\n")

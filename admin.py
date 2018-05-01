@@ -3,7 +3,7 @@ import xmlrpc.client
 class admin:
 
     def cekAdmin(self, username, password):
-        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
+        s = xmlrpc.client.ServerProxy('http://192.168.0.5:5000')
         cekAdmin = s.dataAdmin(username, password)
 
         if (cekAdmin == True ):
