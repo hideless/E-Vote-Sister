@@ -130,27 +130,36 @@ with SimpleXMLRPCServer(("192.168.0.5",5000), requestHandler=RequestHandler) as 
             t = wr.get_sheet(4)
             u = wr.get_sheet(5)
             
-            for i in range(1,len(xbem)):
+            for i in range(1,(rowbem)):
                 s.write(i, 0 , int(i))
+                s.write(i, 0, "")
                 s.write(i, 1,"")
+                s.write(i, 2, "")
 
-            for i in range(1,len(xdpm)):
+            for i in range(1,(rowdpm)):
                 s.write(i, 0 , int(i))
+                s.write(i, 0, "")
                 s.write(i, 1,"")
+                s.write(i, 2, "")
 
-            for i in range(1,len(xhima)):
+            for i in range(1,len(rowhima)):
                 s.write(i, 0 , int(i))
+                s.write(i, 0, "")
                 s.write(i, 1,"")
+                s.write(i, 2, "")
 
             for i in range(len(xbem)):
                 s.write(i+1, 0, int(i + 1))
                 s.write(i+1, 1, str(xbem[i]))
+                s.write(i + 1, 2, int(0))
             for i in range(len(xdpm)):
                 t.write(i+1, 0, int(i + 1))
                 t.write(i+1, 1, str(xdpm[i]))
+                t.write(i + 1, 2, int(0))
             for i in range(len(xhima)):
                 u.write(i+1, 0, int(i + 1))
                 u.write(i+1, 1, str(xhima[i]))
+                u.write(i + 1, 2, int(0))
 
             wr.save('database.xls')
             return True

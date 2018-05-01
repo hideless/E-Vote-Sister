@@ -32,9 +32,7 @@ class admin:
                     print("Data Saved")
 
                 elif(pilih == "3"):
-                    cek = s.cekRegis()
-                    print(cek)
-                    if(cek == True):
+                    if(cekAdmin == True):
                         print("Input Pasangan Kandidat")
                         bem = list()
                         dpm = list()
