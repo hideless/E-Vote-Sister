@@ -1,15 +1,14 @@
 import xmlrpc.client
+import time
 
 class supervisor():
     def Login(self, username, password):
         if (username == "supervisor" and password == "supervisor"):
-            print("Login Success")
             return True
         else:
-            print("Login Failed")
             return False
     def server(self):
-        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
+        s = xmlrpc.client.ServerProxy('http://192.168.0.5:5000')
         return s
     def Hasil(self):
         s = a.server()
@@ -17,13 +16,13 @@ class supervisor():
         dpm = (s.candidateAppDPM())
         hima = (s.candidateAppHIMA())
 
-        print("***** HASIL BEM *****")
+        print("\n----- HASIL PEMILIHAN BEM -----")
         for i in range(len(bem)):
             print(bem[i])
-        print("***** HASIL DPM *****")
+        print("\n----- HASIL PEMILIHAN DPM -----")
         for j in range(len(dpm)):
             print(dpm[j])
-        print("***** HASIL HIMA *****")
+        print("\n----- HASIL PEMILIHAN HIMA -----")
         for k in range(len(hima)):
             print(hima[k])
 
@@ -45,17 +44,19 @@ class supervisor():
 
 a = supervisor()
 while True:
-    print("===== MENU SUPERVISOR =====")
+    print("----- MENU LOGIN SUPERVISOR -----")
     username = input("Username\t: ")
     password = input("Password\t: ")
+    print("---------------------------------")
     pilih = ""
     while pilih != "0":
         if (a.Login(username,password) == True):
+            print("\n----- MENU UTAMA SUPERVISOR -----")
             print("1. Lihat Hasil Pemilu")
             print("2. Lihat Jumlah Voter")
             print("3. Lihat Detail Pemilihan")
             print("4. Reset Data")
-            print("0. Log Out")
+            print("0. Logout")
             pilih =  input("Pilih\t: ")
             if (pilih == "1"):
                 a.Hasil()
@@ -75,6 +76,13 @@ while True:
                     print(a.showRecord()[i])
 
             elif (pilih == "4"):
-                print(a.resetAll())
+                a.resetAll()
+                print("Database Berhasil di Reset!")
+                print("Kembali ke Menu Utama dalam 3 Detik...")
+                time.sleep(3)
+            elif (pilih == "0"):
+                print("\nProgram Akan Kembali Ke Menu Login Dalam 3 Detik...")
+                time.sleep(3)
+                break
         else:
             break
