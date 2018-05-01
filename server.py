@@ -5,6 +5,7 @@ import xlrd
 from xlrd import open_workbook
 from xlutils.copy import copy
 import datetime
+import time
 
 #membatasi path
 class RequestHandler(SimpleXMLRPCRequestHandler):
@@ -87,8 +88,6 @@ with SimpleXMLRPCServer(("192.168.0.5",5000), requestHandler=RequestHandler) as 
                         return True
                     else:
                         return False
-                else:
-                    return False
 
         def inputDataVoter(self, nim, nama, fakultas, prodi):
             workbook = xlrd.open_workbook("database.xls")

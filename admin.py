@@ -1,4 +1,5 @@
 import xmlrpc.client
+import time
 
 class admin:
 
@@ -19,6 +20,7 @@ class admin:
                     nim2 = input("\n""Masukkan NIM untuk diaktivasi: ")
                     nim = int(nim2)
                     print(s.regis(nim))
+                    time.sleep(1)
 
                 elif(pilih == "2"):
                     print("Input Data")

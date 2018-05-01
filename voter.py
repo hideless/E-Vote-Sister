@@ -1,4 +1,5 @@
 import xmlrpc.client
+import time
 
 class voter:
     def server(self):
@@ -52,32 +53,64 @@ while (pilih != 00):
     nim = int(nim2)
     # print(a.cekvoter(nim))
     # print(a.cekStatusPilih(nim))
-    if (a.cekvoter(nim) == True):
-        if (a.cekStatusPilih(nim) == True):
-            start = a.cektime()
-            record = []
-            print("Silahkan Gunakan Hak Pilih Anda...\n")
-            print("---- PILIH BEM ----")
-            for i in range(len(bem)):
-                print("|", i+1, "|", bem[i])
-            pilih1 = input("Pilih BEM : ")
+    try:
+        if (a.cekvoter(nim) == True):
+            if (a.cekStatusPilih(nim) == True):
+                start = a.cektime()
+                record = []
+                cek = False
 
-            print("\n---- PILIH DPM ----")
-            for j in range(len(dpm)):
-                print("|", j+1, "|", dpm[j])
-            pilih2 = input("Pilih DPM : ")
+                print("Silahkan Gunakan Hak Pilih Anda...\n")
 
-            print("\n---- PILIH HIMA ----")
-            for k in range(len(hima)):
-                print("|",k+1,"|", hima[k])
-            pilih3 = input("Pilih HIMA : ")
+                while (not cek):
+                    print("---- PILIH BEM ----")
+                    for i in range(len(bem)):
+                        print("|", i+1, "|", bem[i])
+                    temp = input("Pilih BEM : ")
 
-            record = [pilih1, pilih2, pilih3]
-            end = a.cektime()
-            a.inputRecord(record, nim, start, end)
-            print("Terimakasih Sudah Melakukan Voting \n")
-        else:
-            print("\n||| Mahasiswa sudah voting sebelumnya ||| \n")
-    else:
+                    if ((int(temp) <= len(bem)) and (int(temp) != 0)):
+                        pilih1 = temp
+                        cek = True
+                    else:
+                        print("\nInput anda salah!\nSilahkan pilih kembali!\n")
+
+                cek = False
+
+                while (not cek):
+                    print("\n---- PILIH DPM ----")
+                    for j in range(len(dpm)):
+                        print("|", j+1, "|", dpm[j])
+                    temp = input("Pilih DPM : ")
+
+                    if ((int(temp) <= len(dpm)) and (int(temp) != 0)):
+                        pilih2 = temp
+                        cek = True
+                    else:
+                        print("\nInput anda salah!\nSilahkan pilih kembali!\n")
+
+                cek = False
+
+                while (not cek):
+                    print("\n---- PILIH HIMA ----")
+                    for k in range(len(hima)):
+                        print("|",k+1,"|", hima[k])
+                    temp = input("Pilih HIMA : ")
+
+                    if ((int(temp) <= len(hima)) and (int(temp) != 0)):
+                        pilih3 = temp
+                        cek = True
+                    else:
+                        print("\nInput anda salah!\nSilahkan pilih kembali!\n")
+
+                record = [pilih1, pilih2, pilih3]
+                end = a.cektime()
+                a.inputRecord(record, nim, start, end)
+                print("\n||| Terimakasih Sudah Melakukan Voting |||")
+                time.sleep(1)
+                print("||| Program Akan Kembali Ke Menu Utama Dalam 2 Detik |||\n")
+                time.sleep(2)
+            else:
+                print("\n||| Mahasiswa sudah voting sebelumnya ||| \n")
+    except:
         print("\n""||| NIM anda belum terdaftar |||")
         print("||| Silahkan mendaftarkan NIM anda kepada Admin |||", "\n")
