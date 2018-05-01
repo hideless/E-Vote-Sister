@@ -105,6 +105,7 @@ with SimpleXMLRPCServer(("192.168.0.5",5000), requestHandler=RequestHandler) as 
             s.write(rowmhs, 3, prodi)
             s.write(rowmhs, 4, "no")
             s.write(rowmhs, 5, "no")
+            s.write(rowmhs, 6, int(0))
 
             wr.save('database.xls')
 
