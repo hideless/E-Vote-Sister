@@ -26,7 +26,7 @@ class candidate():
                 print("\n ================================== \n")
             else:
                 print("Login Gagal!")
-                print("Username atau Password salah!")
+                print("Username atau Password salah!\n")
         else:
             print("Voting masih berjalan")
 while True:
