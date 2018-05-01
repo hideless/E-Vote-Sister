@@ -9,7 +9,7 @@ class supervisor():
             print("Login Failed")
             return False
     def server(self):
-        s = xmlrpc.client.ServerProxy('http://192.168.0.13:5000')
+        s = xmlrpc.client.ServerProxy('http://127.0.0.1:5000')
         return s
     def Hasil(self):
         s = a.server()
@@ -39,6 +39,9 @@ class supervisor():
     def showRecord(self):
         s = a.server()
         return s.showRecord()
+    def resetAll(self):
+        s = a.server()
+        reset = (s.resetALL())
 
 a = supervisor()
 while True:
@@ -51,6 +54,7 @@ while True:
             print("1. Lihat Hasil Pemilu")
             print("2. Lihat Jumlah Voter")
             print("3. Lihat Detail Pemilihan")
+            print("4. Reset Data")
             print("0. Log Out")
             pilih =  input("Pilih\t: ")
             if (pilih == "1"):
@@ -69,5 +73,8 @@ while True:
                 print("NIM\tBEM\tDPM\tHIMA\t")
                 for i in range(len(a.showRecord())):
                     print(a.showRecord()[i])
+
+            elif (pilih == "4"):
+                print(a.resetAll())
         else:
             break

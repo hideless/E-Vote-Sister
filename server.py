@@ -12,7 +12,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 #membuat server
-with SimpleXMLRPCServer(("192.168.0.5",5000), requestHandler=RequestHandler) as server:
+with SimpleXMLRPCServer(("127.0.0.1",5000), requestHandler=RequestHandler) as server:
     workbook = xlrd.open_workbook("database.xls")
     mhs = workbook.sheet_by_index(0)
     adm = workbook.sheet_by_index(1)
@@ -141,6 +141,100 @@ with SimpleXMLRPCServer(("192.168.0.5",5000), requestHandler=RequestHandler) as 
                 u.write(i+1, 1, str(xhima[i]))
 
             wr.save('database.xls')
+            return True
+
+        def resetDataMahasiswa(self):
+            workbook = xlrd.open_workbook("database.xls")
+            mhs = workbook.sheet_by_index(0)
+            rowmhs = mhs.nrows
+
+            wb = open_workbook("database.xls")
+            wr = copy(wb)
+            s = wr.get_sheet(0)
+
+            for i in range(1, rowmhs):
+                s.write(i, 4, "no")
+                s.write(i, 5, "no")
+                s.write(i, 6, 0)
+
+            wr.save('database.xls')
+
+            return True
+
+        def resetDataRecord(self):
+            workbook = xlrd.open_workbook("database.xls")
+            rec = workbook.sheet_by_index(2)
+            rowrec = rec.nrows
+            colrec = rec.ncols
+
+            wb = open_workbook("database.xls")
+            wr = copy(wb)
+            s = wr.get_sheet(2)
+
+            for i in range(1, rowrec):
+                for j in range(0, colrec):
+                    s.write(i, j, None)
+
+            wr.save('database.xls')
+
+            return True
+
+        def resetDataBEM(self):
+            workbook = xlrd.open_workbook("database.xls")
+            bem = workbook.sheet_by_index(3)
+            rowbem = bem.nrows
+
+            wb = open_workbook("database.xls")
+            wr = copy(wb)
+            s = wr.get_sheet(3)
+
+            for i in range(1, rowbem):
+                s.write(i, 2, 0)
+
+            wr.save('database.xls')
+
+            return True
+
+        def resetDataDPM(self):
+            workbook = xlrd.open_workbook("database.xls")
+            dpm = workbook.sheet_by_index(4)
+            rowdpm = dpm.nrows
+
+            wb = open_workbook("database.xls")
+            wr = copy(wb)
+            s = wr.get_sheet(4)
+
+            for i in range(1, rowdpm):
+                s.write(i, 2, 0)
+
+            wr.save('database.xls')
+
+            return True
+
+        def resetDataHIMA(self):
+            workbook = xlrd.open_workbook("database.xls")
+            hima = workbook.sheet_by_index(5)
+            rowhima = hima.nrows
+
+            wb = open_workbook("database.xls")
+            wr = copy(wb)
+            s = wr.get_sheet(5)
+
+            for i in range(1, rowhima):
+                s.write(i, 2, 0)
+
+            wr.save('database.xls')
+
+            return True
+
+        def resetALL(self):
+            a = Admin()
+            a.resetDataBEM()
+            a.resetDataDPM()
+            a.resetDataHIMA()
+            a.resetDataMahasiswa()
+            a.resetDataRecord()
+
             return True
 
     server.register_instance(Admin())
