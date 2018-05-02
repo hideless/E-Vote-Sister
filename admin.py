@@ -4,7 +4,7 @@ import time
 class admin:
 
     def cekAdmin(self, username, password):
-        s = xmlrpc.client.ServerProxy('http://192.168.0.5:5000')
+        s = xmlrpc.client.ServerProxy('http://localhost:5000')
         cekAdmin = s.dataAdmin(username, password)
 
         if (cekAdmin == True ):
@@ -29,19 +29,20 @@ class admin:
                     fakultas = input("Fakultas: ")
                     prodi  = input("Prodi: ")
                     s.inputDataVoter(nim, nama, fakultas, prodi)
-                    print("Data Saved")
+                    print("\n||| Data Telah Tersimpan |||")
+                    time.sleep(2)
 
                 elif(pilih == "3"):
                     if(cekAdmin == True):
-                        print("\nInput Pasangan Kandidat")
+                        print("\n||| Input Pasangan Kandidat BEM |||\n")
                         bem = list()
                         dpm = list()
                         hima = list()
-                        jum2 = input("Jumlah Kandidat BEM\t: ")
+                        jum2 = input("Jumlah Kandidat BEM: ")
                         jum = int(jum2)
                         while True:
                             if (jum >= 2):
-                                print("Input Kandidat BEM")
+                                print("\nInput Kandidat BEM")
                                 for i in range(jum):
                                     temp = input("Nama Pasangan Kandidat\t: ")
                                     bem.append(str(temp))
@@ -50,11 +51,11 @@ class admin:
                                 print("Jumlah Kandidat Tidak Valid (>=2)")
                                 break
 
-                        jum2 = input("Jumlah Kandidat DPM\t: ")
+                        jum2 = input("\nJumlah Kandidat DPM: ")
                         jum = int(jum2)
                         while True:
                             if (jum >= 2):
-                                print("Input Kandidat DPM")
+                                print("\nInput Kandidat DPM")
                                 for i in range(jum):
                                     temp = input("Nama Pasangan Kandidat\t: ")
                                     dpm.append(str(temp))
@@ -63,11 +64,11 @@ class admin:
                                 print("Jumlah Kandidat Tidak Valid (>=2)")
                                 break
 
-                        jum2 = input("Jumlah Kandidat HIMA\t: ")
+                        jum2 = input("\nJumlah Kandidat HIMA: ")
                         jum = int(jum2)
                         while True:
                             if (jum >= 2):
-                                print("Input Kandidat HIMA")
+                                print("\nInput Kandidat HIMA")
                                 for i in range(jum):
                                     temp = input("Nama Pasangan Kandidat\t: ")
                                     hima.append(str(temp))
@@ -76,6 +77,9 @@ class admin:
                                 print("Jumlah Kandidat Tidak Valid (>=2)")
                                 break
                         s.inputDataKandidat(bem, dpm, hima)
+                        print("\nData Telah Disimpan!")
+                        print("Kembali Ke Menu Utama Dalam 3 Detik...")
+                        time.sleep(3)
 
                     else:
                         print("Access Denied")

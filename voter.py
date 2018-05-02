@@ -3,7 +3,7 @@ import time
 
 class voter:
     def server(self):
-        s = xmlrpc.client.ServerProxy('http://192.168.0.5:5000')
+        s = xmlrpc.client.ServerProxy('http://localhost:5000')
         return s
 
     def cekvoter(self, nim):
@@ -51,11 +51,6 @@ while (pilih != 00):
     print("===== MENU VOTER =====")
     nim2 = input("NIM : ")
     nim = int(nim2)
-    # if (a.cekvoter(nim) == False):
-    #     print("\n""||| NIM anda belum terdaftar |||")
-    #     print("||| Silahkan mendaftarkan NIM anda kepada Admin |||", "\n")
-    # print(a.cekvoter(nim))
-    # print(a.cekStatusPilih(nim))
     try:
         if (a.cekvoter(nim) == True):
             if (a.cekStatusPilih(nim) == True):

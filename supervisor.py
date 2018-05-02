@@ -8,7 +8,7 @@ class supervisor():
         else:
             return False
     def server(self):
-        s = xmlrpc.client.ServerProxy('http://192.168.0.5:5000')
+        s = xmlrpc.client.ServerProxy('http://localhost:5000')
         return s
     def Hasil(self):
         s = a.server()

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../../Python/Q-Learning/.idea/Q-Learning.iml" filepath="$PROJECT_DIR$/../../Python/Q-Learning/.idea/Q-Learning.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/TUBES.iml" filepath="$PROJECT_DIR$/.idea/TUBES.iml" />
     </modules>
   </component>

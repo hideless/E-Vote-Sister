@@ -12,7 +12,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 #membuat server
-with SimpleXMLRPCServer(("192.168.0.5",5000), requestHandler=RequestHandler) as server:
+with SimpleXMLRPCServer(("localhost",5000), requestHandler=RequestHandler) as server:
     workbook = xlrd.open_workbook("database.xls")
     mhs = workbook.sheet_by_index(0)
     adm = workbook.sheet_by_index(1)
