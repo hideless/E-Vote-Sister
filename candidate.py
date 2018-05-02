@@ -2,7 +2,7 @@ import xmlrpc.client
 
 class candidate():
     def cekAdmin(self, username, password):
-        s = xmlrpc.client.ServerProxy('http://192.168.0.5:5000')
+        s = xmlrpc.client.ServerProxy('http://localhost:5000')
         cekAdmin = s.dataAdmin(username, password)
         time = str(s.getTime())
 

@@ -343,18 +343,24 @@ with SimpleXMLRPCServer(("localhost",5000), requestHandler=RequestHandler) as se
         dpm = workbook.sheet_by_index(4)
         hima = workbook.sheet_by_index(5)
         def candidateAppBEM(self):
+            workbook = xlrd.open_workbook("database.xls")
+            bem = workbook.sheet_by_index(3)
             cbem = []
             for i in range(1, rowbem):
                 cbem.append([int(bem.cell(i, 0).value), str(bem.cell(i, 1).value), int(bem.cell(i, 2).value)])
             return cbem
 
         def candidateAppDPM(self):
+            workbook = xlrd.open_workbook("database.xls")
+            dpm = workbook.sheet_by_index(4)
             cdpm = []
             for i in range(1, rowdpm):
                 cdpm.append([int(dpm.cell(i, 0).value), str(dpm.cell(i, 1).value), int(dpm.cell(i, 2).value)])
             return cdpm
 
         def candidateAppHIMA(self):
+            workbook = xlrd.open_workbook("database.xls")
+            hima = workbook.sheet_by_index(5)
             chima = []
             for i in range(1, rowhima):
                 chima.append([int(hima.cell(i, 0).value), str(hima.cell(i, 1).value), int(hima.cell(i, 2).value)])
